@@ -19,9 +19,22 @@ Example: real-time log analysis of fly.io logs.
 ```bash
 flyctl logs --json \
   | jq '.message |= fromjson' -r \
-  | jq 'select(.message.payload.duration_ms != null) | [.message.payload.duration_ms, .message.payload.url, .region, .instance, .message.payload.user] | @tsv' -r \
+  | jq 'select(.message.payload.duration_ms != null) | [.message.payload.duration_ms, .message.payload.url, .region, .instance] | @tsv' -r \
   | histo
 ```
+
+### Summary Statistics
+![image](https://github.com/user-attachments/assets/319b6f97-df73-4b44-9ad3-29ee80c7dd21)
+
+### Per-facet view
+View histograms of across values within a facet.
+![image](https://github.com/user-attachments/assets/aea43d52-73d2-478d-98d9-48ae05c011ab)
+
+### Pinning
+Pinning a value within a facet applies it as a filter to the stream. For example, pinning the endpoint allows us to view request duration statistics for just that endpoint.
+![image](https://github.com/user-attachments/assets/fae2aaad-ceec-484d-acc0-aef32134300f)
+
+
 
 ### Navigation
 
